@@ -1,0 +1,7 @@
+{
+    "name": "angular8-with-material",
+    "version": 2,
+    "builds": [
+        { "src": "./**/*.*", "use": "@now/static" }
+    ]
+}
