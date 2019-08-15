@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,6 +11,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material/core';
 import {DemoMaterialModule} from './app.material.module';
 
+
 // Uncomment to turn off animations
 // import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -18,14 +20,17 @@ import {DemoMaterialModule} from './app.material.module';
     AppComponent
   ],
   imports: [
+    
     DemoMaterialModule,
     MatNativeDateModule,
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
     /*NoopAnimationsModule | remove this comment to remove animaiton | */
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// platformBrowserDynamic().bootstrapModule(AppModule);
