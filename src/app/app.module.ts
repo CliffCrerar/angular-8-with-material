@@ -20,7 +20,6 @@ import {DemoMaterialModule} from './app.material.module';
     AppComponent
   ],
   imports: [
-    
     DemoMaterialModule,
     MatNativeDateModule,
     BrowserModule,

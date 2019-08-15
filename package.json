@@ -1,38 +1,38 @@
 {
-  "name": "sandbox",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve --port 4300",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "github:angular/animations-builds",
-    "@angular/cdk": "github:angular/cdk-builds",
-    "@angular/common": "~8.0.1",
-    "@angular/compiler": "~8.0.1",
-    "@angular/core": "~8.0.1",
-    "@angular/forms": "~8.0.1",
-    "@angular/material": "github:angular/material2-builds",
-    "@angular/platform-browser": "~8.0.1",
-    "@angular/platform-browser-dynamic": "^8.0.3",
-    "@angular/router": "~8.0.1",
-    "rxjs": "~6.4.0",
-    "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "~0.800.0",
-    "@angular/cli": "~8.0.3",
-    "@angular/compiler-cli": "~8.0.1",
-    "@angular/language-service": "~8.0.1",
-    "@types/node": "~8.9.4",
-    "ts-node": "~7.0.0",
-    "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
-  }
+    "name": "angular-8-with-material",
+    "version": "0.0.0",
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve --port 4300",
+        "build": "ng build",
+        "test": "ng test",
+        "lint": "ng lint",
+        "e2e": "ng e2e"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "*",
+        "@angular/cdk": "*",
+        "@angular/common": "*",
+        "@angular/compiler": "*",
+        "@angular/core": "*",
+        "@angular/forms": "*",
+        "@angular/material": "*",
+        "@angular/platform-browser": "*",
+        "@angular/platform-browser-dynamic": "*",
+        "@angular/router": "*",
+        "rxjs": "*",
+        "tslib": "*",
+        "zone.js": "*"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "*",
+        "@angular/cli": "*",
+        "@angular/compiler-cli": "*",
+        "@angular/language-service": "*",
+        "@types/node": "*",
+        "ts-node": "*",
+        "tslint": "*",
+        "typescript": "*"
+    }
 }

@@ -3,17 +3,21 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./icons.css";
-
 body,
-html{
-    min-height: 100vh;
-    height: auto;
-    width: 100vw;
-}
+html {}
 
-html{
+html {
     font-family: Roboto;
     font-weight: 50 !important;
     background: #673AB7;
     color: white;
+}
+
+.white-link {
+    color: white;
+    text-decoration: none;
+}
+
+.white-link:hover {
+    color: blue;
 }
