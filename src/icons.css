@@ -21,3 +21,7 @@
     -moz-font-feature-settings: 'liga';
     -moz-osx-font-smoothing: grayscale;
   }
+
+  .mat-snack-bar-container{
+    font-family: roboto;
+  }

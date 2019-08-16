@@ -1,0 +1,50 @@
+<mat-card
+    class="mat-elevation-z8"
+    style="position: relative;width: 50%; margin: auto;"
+>
+    <mat-card-header>
+        <h1>snackbar.loading works!</h1>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-grid-list
+            cols="4"
+            rowHeight="2:1"
+        >
+            <mat-radio-group>
+                <mat-grid-tile *ngFor="let icon of icons; let i = index">
+                    <mat-card>
+                            <mat-radio-button
+                                [checked]="i===0"
+                                value="{{icon}}"
+                                (change)="onRadioChange($event)"
+                            >
+                                <mat-icon>{{icon}}</mat-icon>
+                            </mat-radio-button>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-radio-group>
+        </mat-grid-list>
+    </mat-card-content>
+    <mat-card-footer>
+        <div style="padding: 10px">
+            <button
+                style="margin-top: 100px"
+                mat-button
+                mat-raised-button
+                color="primary"
+                (click)="openNormalSnackBar()"
+            >
+                Show normal-bar
+            </button>
+            <button
+                style="margin-top: 100px; margin-left: 3vw"
+                mat-button
+                mat-raised-button
+                color="accent"
+                (click)="openLoadingSnackBar()"
+            >
+                Show loading-bar
+            </button>
+        </div>
+    </mat-card-footer>
+</mat-card>
