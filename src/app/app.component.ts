@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sandbox';
+  todos =[];
+
+  addTodo(ev){
+    console.log(ev);
+    this.todos.push(ev.value)
+  }
 }

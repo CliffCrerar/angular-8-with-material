@@ -14,6 +14,6 @@ export class SnackBarLoadingModel {
 export class SnackBarDataModel {
     constructor(
         public message?: string,
-        public action?: string,
+        public action?: string
     ) { }
 }

@@ -3,7 +3,7 @@
     style="position: relative;width: 50%; margin: auto;"
 >
     <mat-card-header>
-        <h1>snackbar.loading works!</h1>
+        <h1>Phase one component design</h1>
     </mat-card-header>
     <mat-card-content>
         <mat-grid-list
@@ -26,9 +26,9 @@
         </mat-grid-list>
     </mat-card-content>
     <mat-card-footer>
-        <div style="padding: 10px">
+        <div style="padding: 10px; display: flex; justify-content: space-around;">
             <button
-                style="margin-top: 100px"
+                style="margin-top: 10px;"
                 mat-button
                 mat-raised-button
                 color="primary"
@@ -37,14 +37,27 @@
                 Show normal-bar
             </button>
             <button
-                style="margin-top: 100px; margin-left: 3vw"
+                style="margin-top: 10px;"
                 mat-button
-                mat-raised-button
+                mat-raised
                 color="accent"
-                (click)="openLoadingSnackBar()"
+                (click)="commsToView()"
             >
-                Show loading-bar
+                Message to View
             </button>
+            <button
+            style="margin-top: 10px;"
+            mat-button
+            mat-raised-button
+            color="accent"
+            (click)="openLoadingSnackBar()"
+        >
+        Show loading Snack
+        </button>
+        </div>
+        <hr>
+        <div>
+
         </div>
     </mat-card-footer>
 </mat-card>
