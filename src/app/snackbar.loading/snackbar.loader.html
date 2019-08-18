@@ -4,8 +4,10 @@
         <div>
             <mat-icon class="spin-cw">{{snackBarData.setIcon}}</mat-icon>
         </div>
-        <div>{{snackBarData.data.message}}</div>
-        <div>Dismiss</div>
+        <div style="position: relative; width: 100%;display: flex; justify-content: space-between">
+            <div>{{snackBarData.data.message}}</div>
+            <button *ngIf="dismissTest" (click)="">dismiss test</button>
+        </div>
     </div>
 
 </mat-label>

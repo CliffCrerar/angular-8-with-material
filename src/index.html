@@ -1,14 +1,72 @@
-<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Sandbox</title>
-  <base href="/">
+    <head>
+        <meta charset="utf-8">
+        <title>Sandbox</title>
+        <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+        >
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+    </head>
+    <body>
+        <div style="position=absolute,top=10%;left=10%;z-index=100000;">
+            <button>Test button</button>
+            <button onclick="console.log(`----CONSOLE LINE #${evTrackUserConsLogLine++}----`,)">Add console line</button>
+          </div>
+          
+        <app-root  (add)="addTodo($event)">
+            
+        </app-root>
+
+        <script>
+            function eventTracker() {
+              window.evTrackUserConsLogLine=0;
+
+
+              const listenOnly = true;
+              const toEvent = ["message"];
+              
+              const exclude = ['mousemove','pointermove','mouseover','mouseout','pointerover','pointerout','transitionend'];
+              const doNotListen = false;
+              
+              const customListenerBox = document.createElement('div');
+
+              customListenerBox.innerHTML = `
+                <div>
+                  <form>
+                    <label for="excludeEvents">Exclude Events:</label>
+                    <input id="excludeEvents" name="exclude_events" />  
+                  <form>
+                </div>
+              `
+              // return new Promise((resolve,reject){return re});
+              // self invoked function to start listening for events
+              return (function(window){
+                Object.keys(window).forEach(key => {
+                  if (/^on/.test(key)) {
+                      window.addEventListener(key.slice(2), function(event){
+                        // console.log('event.type: ', event.type);
+                        // If true the listener is only active for that array of events
+
+                        if(listenOnly){
+
+                          toEvent.includes(event.type) &&  (function(){
+                            console.log("EV selected: ",event);
+                          }())
+
+                        } else if(doNotListen){
+                          !exclEvents.includes(event.type) && console.log("EV excl: ",event);
+                        }
+                        
+                      });
+                  }
+              });
+              // self invoked function to start listening for events
+              }(window));
+            }
+            // eventTracker();
+        </script>
+    </body>
 </html>
