@@ -4,7 +4,6 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/s
 import { SnackBarLoadingModel } from './snackbar.loading.model';
 // import { Observable, Subject } from 'rxjs';
 import { SnackbarInternalService } from './snackbar.internal.service';
-import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-snackbar-loading',
@@ -13,6 +12,7 @@ import { OnDestroy } from '@angular/core';
   providers: [SnackbarInternalService],
 })
 export class SnackbarLoadingComponent implements OnInit {
+  
   icons: string[];
   snackBar: SnackBarLoadingModel;
   simpleSnackBarRef: MatSnackBarRef<SimpleSnackBar>;
@@ -44,7 +44,6 @@ export class SnackbarLoadingComponent implements OnInit {
   openLoadingSnackBar() {
     if(!this.loadingStateDisplay){
       this.componentSnackBarRef = this._snackBar.openFromComponent(LoadingSnackBar,{ data: this.snackBar });
-      console.log('this.componentSnackBarRef: ', this.componentSnackBarRef);
       this.loadingStateDisplay=true;
     } else {
       return 
@@ -57,11 +56,7 @@ export class SnackbarLoadingComponent implements OnInit {
 
   onRadioChange(event) {
     this.internalService.setNewIcon(event.value);
-    console.log(this.snackBar);
-    this.snackBar.loadingIcon = event.value;
-    LoadingSnackBar
-    console.log('LoadingSnackBar: ', LoadingSnackBar);
-    console.log(this);
+    this.snackBar.loadingIcon = event.value;    
   }
   
   ngOnDestroy(){
@@ -82,31 +77,20 @@ export class SnackbarLoadingComponent implements OnInit {
       this.toggleControlButtons();
       this.dismissSnackBar();
     }
-
   }
   
   throwError(){
     //this.snackBar.state
-    
-    
       this.internalService.setError();
       this.loadingStateDisplay=false;
       this.snackBar.state.handlingHttp =[];
       this.snackBar.state.callCounter=0;
-      this.snackBar.state.reloadBtn = false;
       this.snackBar.state.spinningClass = '';
       this.snackBar.state.error = true;
-      this.toggleControlButtons();
       this.openLoadingSnackBar();
       this.componentSnackBarRef.instance.snackBarView = this.snackBar;
-      
     }
-    
-    
-
-
-  
-  
+    // buttons
   toggleControlButtons(){
     this.loadingStateDisplay=!this.loadingStateDisplay;
     this.btnDisplayState=!this.btnDisplayState;

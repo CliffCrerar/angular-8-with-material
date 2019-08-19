@@ -6,6 +6,10 @@ body {
     background: blue !important;
 }
 
+.dont-display{
+    display: none;
+}
+
 .view-container {
     position: relative;
     max-height: 100vh;

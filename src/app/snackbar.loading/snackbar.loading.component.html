@@ -1,49 +1,8 @@
-<div class="view-container">
-    <mat-card class="mat-elevation-z8" style="position: relative;width: 50%; margin: auto;">
-        <mat-card-header>
-            <h1>Phase one component design</h1>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-grid-list cols="4" rowHeight="2:1">
-                <mat-radio-group>
-                    <mat-grid-tile *ngFor="let icon of icons; let i = index">
-                        <mat-card>
-                            <mat-radio-button [checked]="i===0" value="{{icon}}" (change)="onRadioChange($event)">
-                                <mat-icon>{{icon}}</mat-icon>
-                            </mat-radio-button>
-                        </mat-card>
-                    </mat-grid-tile>
-                </mat-radio-group>
-                <mat-chip-list></mat-chip-list>
-            </mat-grid-list>
-        </mat-card-content>
-        <mat-card-footer>
-            <div style=" padding: 10px; display: flex; justify-content: space-around;">
-                <button style="margin-top: 10px;" mat-button mat-raised-button color="primary" (click)="openNormalSnackBar()">
-                Show normal-bar
-            </button>
-                <button style="margin-top: 10px;" mat-button mat-raised color="accent" (click)="componentSnackBarRef.dismiss()">
-            </button>
-                <button style="margin-top: 10px;" mat-button mat-raised-button color="accent" (click)="openLoadingSnackBar()">
-        Show loading Snack
-        </button>
-            </div>
-            <mat-divider></mat-divider>
-            <div style="padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-
-                <button (click)="startHttp()" mat-button mat-raised-button color="basic">Start Http Call</button>
-                <button (click)="throwError()" disabled="{{btnDisplayState}}" mat-button mat-raised-button color="warn">ThrowError</button>
-                <button (click)="endHttp()" disabled="{{btnDisplayState}}" mat-button mat-raised-button color="primary">End Call</button>
-
-            </div>
-            <div style="padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <h3>Counter: <span #count>{{snackBar.state.callCounter}}</span></h3>
-            </div>
-            <div style="position: relative; width: 90%;padding: 10px; overflow-y: scroll">
-                <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
-                    <mat-chip *ngFor="let i of snackBar.state.handlingHttp" selected>{{i}}</mat-chip>
-                </mat-chip-list>
-            </div>
-        </mat-card-footer>
-    </mat-card>
-    <div>
+<div class="test-btn-container" ngClass="{{!btnDisplayState && 'dont-display'}}">
+<button (click)="openNormalSnackBar()">Show normal-bar</button>
+<button (click)="openLoadingSnackBar()">Show loading Snack</button>
+<button (click)="startHttp()">Start Http Call</button>
+<button (click)="throwError()">ThrowError</button>
+<button (click)="endHttp()">End Call</button>
+</div>
+<!-- <div>{{snackBar.state.callCounter}}</div> -->
