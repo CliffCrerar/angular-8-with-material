@@ -1,12 +1,12 @@
 <mat-label dismiss>
 
-    <div style="display: flex !important; flex-direction: row; align-items:center !important">
+    <div [ngClass]="snackBarView.state.error && 'error-class'" style="display: flex !important; flex-direction: row; align-items:center !important;">
         <div>
-            <mat-icon class="spin-cw">{{snackBarData.setIcon}}</mat-icon>
+            <mat-icon ngClass="{{snackBarView.state.spinningClass}}" [innerHtml]="snackBarView.loadingIcon"></mat-icon>
         </div>
-        <div style="position: relative; width: 100%;display: flex; justify-content: space-between">
-            <div>{{snackBarData.data.message}}</div>
-            <button *ngIf="dismissTest" (click)="">dismiss test</button>
+        <div style="position: relative; width: 100%;display: flex; justify-content: space-between; margin-left: 10px;">
+            <span>{{snackBarView.state.message}}</span>
+            <button hidden="{{snackBarView.state.reloadBtn}}" class="reload-page-button">Reload Page</button>
         </div>
     </div>
 

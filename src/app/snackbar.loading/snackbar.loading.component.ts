@@ -2,24 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 //import { SnackbarInternalService } from './snackbar.internal.service';
 import { SnackBarLoadingModel } from './snackbar.loading.model';
-import { Observable, Subject } from 'rxjs';
+// import { Observable, Subject } from 'rxjs';
 import { SnackbarInternalService } from './snackbar.internal.service';
 import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-snackbar-loading',
   templateUrl: './snackbar.loading.component.html',
-  styleUrls: ['./snackbar.loading.component.css']
-  //providers: [SnackbarInternalService]
+  styleUrls: ['./snackbar.loading.component.css'],
+  providers: [SnackbarInternalService],
 })
 export class SnackbarLoadingComponent implements OnInit {
   icons: string[];
-  snackBarData: SnackBarLoadingModel;
-  simpleSnackBarRef: MatSnackBarRef<SnackBarLoadingModel>;
+  snackBar: SnackBarLoadingModel;
+  simpleSnackBarRef: MatSnackBarRef<SimpleSnackBar>;
   componentSnackBarRef: MatSnackBarRef<LoadingSnackBar>;
-  msgToView;
-  // msgFromView: Subject<any>;
-  componentSnackbarObservable: Observable<MatSnackBar>
+  loadingStateDisplay = false;
+  btnDisplayState = true;
 
   /* CONSTRUCTOR */
   constructor(
@@ -27,58 +26,90 @@ export class SnackbarLoadingComponent implements OnInit {
     private internalService: SnackbarInternalService
   ) {
     this.icons = this.internalService.getIcons();
-    this.snackBarData = this.internalService.getSnackBarData();
-    // this.msgToView = this.internalService.sendMessageToView;
-    // this.msgFromView = this.internalService.viewToController;
-    // Set observables
-    // this.msgToView this
-
-    console.log('this.snackBarData: ', this.snackBarData);
-    console.log('this.msgToView: ', this.msgToView);
+    this.snackBar = this.internalService.getSnackBar();
   }
   
   /* ON INIT */
   ngOnInit() {
-    // this.msgFromView.subscribe(
-    //   (v_msg) => console.log('Message from view: ', v_msg)
-    // );
+    // this.displayIcon = this.snackBar.setIcon
   }
+  
+  /* CLASS METHODS */
   // Normal Snackbar
   openNormalSnackBar() {
-    const message = "Updating"
-    const action = "go away"
-    console.log('_snackBar: ', this._snackBar);
-    this.simpleSnackBarRef = this._snackBar.open(message, action, {
-
-      //duration: 2000,
-    });
+    const message = this.snackBar.state.message;
+    this.simpleSnackBarRef = this._snackBar.open(message);
   }
   // Loading snackbar
   openLoadingSnackBar() {
-    const message = "Updating";
-    const action = "go away";
-    this.componentSnackbarObservable = <any>this._snackBar.openFromComponent(LoadingSnackBar,
-
-      { data: this.snackBarData.data },
-    );
-    console.log('this.componentSnackBarRef: ', this.componentSnackbarObservable);
-
-    // this.componentSnackbarObservable.subscribe((openedEvent)=>{
-    //   console.log('openedEvent: ', openedEvent);
-    //   console.log('Snackbar opened');
-    // })
+    if(!this.loadingStateDisplay){
+      this.componentSnackBarRef = this._snackBar.openFromComponent(LoadingSnackBar,{ data: this.snackBar });
+      console.log('this.componentSnackBarRef: ', this.componentSnackBarRef);
+      this.loadingStateDisplay=true;
+    } else {
+      return 
+    }
+  }
+  
+  dismissSnackBar(){
+    this.componentSnackBarRef.dismiss();
   }
 
   onRadioChange(event) {
-    console.log(event.value);
-    this.snackBarData.setIcon = event.value;
+    this.internalService.setNewIcon(event.value);
+    console.log(this.snackBar);
+    this.snackBar.loadingIcon = event.value;
+    LoadingSnackBar
+    console.log('LoadingSnackBar: ', LoadingSnackBar);
+    console.log(this);
   }
+  
+  ngOnDestroy(){
+    console.log('ng on destroy');
+  }
+  
+  startHttp(){
+    this.openLoadingSnackBar();
+    this.snackBar.state.handlingHttp.push(new Date().toLocaleTimeString());
+    this.snackBar.state.callCounter++;
+    this.btnDisplayState=false;
+  }
+  
+  endHttp(){
+    this.snackBar.state.handlingHttp.splice(0,1);
+    this.snackBar.state.callCounter--;
+    if(this.snackBar.state.callCounter===0){
+      this.toggleControlButtons();
+      this.dismissSnackBar();
+    }
 
-  commsToView() {
-    const msg = 'Sup view'
-    console.log('Controller: ', msg);
-    // this.msgToView(msg);
-    this.internalService.sendMessageToView(msg);
+  }
+  
+  throwError(){
+    //this.snackBar.state
+    
+    
+      this.internalService.setError();
+      this.loadingStateDisplay=false;
+      this.snackBar.state.handlingHttp =[];
+      this.snackBar.state.callCounter=0;
+      this.snackBar.state.reloadBtn = false;
+      this.snackBar.state.spinningClass = '';
+      this.snackBar.state.error = true;
+      this.toggleControlButtons();
+      this.openLoadingSnackBar();
+      this.componentSnackBarRef.instance.snackBarView = this.snackBar;
+      
+    }
+    
+    
+
+
+  
+  
+  toggleControlButtons(){
+    this.loadingStateDisplay=!this.loadingStateDisplay;
+    this.btnDisplayState=!this.btnDisplayState;
   }
 }
 
@@ -88,34 +119,21 @@ export class SnackbarLoadingComponent implements OnInit {
 @Component({
   selector: `snackbar-loading`,
   templateUrl: './snackbar.loader.html',
-  styleUrls: ['./snackbar.loading.component.css']
-  // providers: [SnackbarInternalService]
+  styleUrls: ['./snackbar.loading.component.css'],
+  providers: [SnackbarInternalService]
 })
-export class LoadingSnackBar implements OnInit, OnDestroy {
-  message = 'message';
-  dismissTest = true;
-  snackBarData: SnackBarLoadingModel;
-  msgFromController: Subject<any>;
-  msgToController: Subject<any>;
+export class LoadingSnackBar implements OnInit {
+  dismissTest = false;
+  snackBarView: SnackBarLoadingModel;
   constructor(
     private internalService: SnackbarInternalService
   ) {
-    this.snackBarData = this.internalService.getSnackBarData();
-    this.msgFromController = this.internalService.controllerToView;
-    this.msgToController = this.internalService.viewToController;
-
-    console.log('msgFromController: ', this.msgFromController);
-    // console.log('msgToController: ', this.msgToController);
+    this.snackBarView = this.internalService.getSnackBar();
+    
   }
-
-  ngOnInit() {
-    console.log(this);
-    this.msgFromController.subscribe((c_msg) => console.log('MSG from controller(view): ', c_msg))
-
-    this.internalService.controllerToView.subscribe((c_msg) => console.log('MSG from controller(view): ', c_msg))
-  }
-
-  ngOnDestroy(){
-    console.log('ng on destroy');
+  
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class
   }
 }

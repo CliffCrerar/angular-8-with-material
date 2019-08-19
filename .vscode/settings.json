@@ -1,3 +1,7 @@
 {
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "workbench.colorCustomizations": {
+        "tab.unfocusedActiveBorder": "#fff0"
+    },
+    "workbench.colorTheme": "Red"
 }

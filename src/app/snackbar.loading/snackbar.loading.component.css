@@ -1,33 +1,48 @@
 html,
-body{
-  height: 100vh !important;
-  width: 100vw !important;
-  background: blue !important;
+body {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    width: 100vw !important;
+    background: blue !important;
 }
 
-	.spin-cw {
-		animation: spinning 2s linear infinite reverse;
-	}
+.view-container {
+    position: relative;
+    max-height: 100vh;
+}
 
-	.spin-acw {
-		animation: spinning 2s linear infinite;
-	}
+.reload-page-button {
+    border: 0px solid transparent;
+    background: transparent;
+    color: #fff;
+}
 
-	@keyframes spinning {
-		0% {
-			transform: rotate(0);
-		}
-		25% {
-			transform: rotate(90deg);
-		}
-		50% {
-			transform: rotate(180deg);
-		}
-		75% {
-			transform: rotate(270deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
+.error-class {
+    color: #ff4081;
+}
 
-	}
+.spin-cw {
+    animation: spinning 2s linear infinite reverse;
+}
+
+.spin-acw {
+    animation: spinning 2s linear infinite;
+}
+
+@keyframes spinning {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
