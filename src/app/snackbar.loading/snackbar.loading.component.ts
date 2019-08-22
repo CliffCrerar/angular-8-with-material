@@ -88,7 +88,6 @@ export class SnackbarLoadingComponent implements OnInit {
   throwError(){
     //this.snackBar.state
     
-    
       this.internalService.setError();
       this.loadingStateDisplay=false;
       this.snackBar.state.handlingHttp =[];
@@ -102,11 +101,6 @@ export class SnackbarLoadingComponent implements OnInit {
       
     }
     
-    
-
-
-  
-  
   toggleControlButtons(){
     this.loadingStateDisplay=!this.loadingStateDisplay;
     this.btnDisplayState=!this.btnDisplayState;
@@ -129,7 +123,6 @@ export class LoadingSnackBar implements OnInit {
     private internalService: SnackbarInternalService
   ) {
     this.snackBarView = this.internalService.getSnackBar();
-    
   }
   
   ngOnInit(): void {

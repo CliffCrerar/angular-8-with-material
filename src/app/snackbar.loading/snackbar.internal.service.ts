@@ -29,16 +29,16 @@ export class SnackbarInternalService {
         return this.icon;
     }
     
-    setNewIcon(newIcon){
+    setNewIcon(newIcon:string){
         this.icon = newIcon;
     }
     
-    setNewMessage(){
-        
+    setNewMessage(msg:string){
+        this.snackBarData.state.message = msg;
     }
     
     setError(){
         this.snackBarData.loadingIcon = this.snackBarData.errorIcon;
-        this.snackBarData.state.message = "ERROR: Something went wrong, please reload page."
+        this.setNewMessage("ERROR: Something went wrong, please reload page.")
     }
 }
